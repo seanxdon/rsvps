@@ -9,7 +9,11 @@ const ul = document.querySelector('#invitedList');
 function createLI(text) {
 	//Creating an li of invitees
 	const li = document.createElement('li');
-	li.textContent = text;
+
+	//edit button span
+	const span = document.createElement('span');
+	span.textContent = text;
+	li.appendChild(span);
 
 	//Label 'Confirmed' created from the DOM
 	const label = document.createElement('label');
@@ -22,10 +26,13 @@ function createLI(text) {
 	li.appendChild(label);
 
 	//Remove button created from the DOM
-	const button = document.createElement('button');
-	button.textContent = 'remove';
-	li.appendChild(button);
+	const editButton = document.createElement('button');
+	editButton.textContent = 'edit';
+	li.appendChild(editButton);
 
+	const removeButton = document.createElement('button');
+	removeButton.textContent = 'remove';
+	li.appendChild(removeButton);
 	return li;
 }
 
@@ -59,8 +66,29 @@ ul.addEventListener('change', (e) => {
 //button
 ul.addEventListener('click', (e) => {
 	if (e.target.tagName === 'BUTTON') {
-		const li = e.target.parentNode;
+		const button = e.target;
+		const li = button.parentNode;
 		const ul = li.parentNode;
-		ul.removeChild(li);
+		//button with class name remove
+		if (e.target.textContent === 'remove') {
+			ul.removeChild(li);
+			//button with class name edit
+		} else if (button.textContent === 'edit') {
+			const span = li.firstElementChild;
+			const input = document.createElement('input');
+			input.type = 'text';
+			input.value = span.textContent;
+			li.insertBefore(input, span);
+			li.removeChild(span);
+			button.textContent = 'save';
+			//button with class name save
+		} else if (button.textContent === 'save') {
+			const input = li.firstElementChild;
+			const span = document.createElement('span');
+			span.textContent = input.value;
+			li.insertBefore(span, input);
+			li.removeChild(input);
+			button.textContent = 'edit';
+		}
 	}
 });
