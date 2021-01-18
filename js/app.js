@@ -1,3 +1,4 @@
+// IFFEE
 document.addEventListener('DOMContentLoaded', () => {
 	// set form var
 	let form = document.querySelector('#registrar');
