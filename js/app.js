@@ -47,28 +47,24 @@ document.addEventListener('DOMContentLoaded', () => {
 			return element;
 		}
 
+		function appendToLi(elementName, property, value) {
+			const element = createElement(elementName, property, value);
+			li.appendChild(element);
+			return element;
+		}
 		//Creating an li of invitees
 		const li = document.createElement('li');
 
 		//edit button span
-		const span = createElement('span', 'textContent', text);
-		li.appendChild(span);
+		appendToLi('span', 'textContent', text).appendChild(
+			//Checkbox created from DOM
+			createElement('input', 'type', 'checkbox')
+		);
+		//edit button appended to li
+		appendToLi('button', 'textContent', 'edit');
+		//Remove button appended to li
+		appendToLi('button', 'textContent', 'remove');
 
-		//Label 'Confirmed' created from the DOM
-		const label = createElement('label', 'textContent', 'Confirmed');
-		li.appendChild(label);
-
-		//Checkbox created from DOM
-		const checkbox = createElement('input', 'type', 'checkbox');
-		label.appendChild(checkbox);
-
-		//Remove button created from the DOM
-		const editButton = createElement('button', 'textContent', 'edit');
-		li.appendChild(editButton);
-
-		const removeButton = createElement('button', 'textContent', 'remove');
-
-		li.appendChild(removeButton);
 		return li;
 	}
 
