@@ -61,6 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		//Checkbox created from DOM
 		const checkbox = createElement('input', 'type', 'checkbox');
 		label.appendChild(checkbox);
+<<<<<<< HEAD
 
 		//Remove button created from the DOM
 		const editButton = createElement('button', 'textContent', 'edit');
@@ -68,6 +69,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
 		const removeButton = createElement('button', 'textContent', 'remove');
 
+=======
+
+		//Remove button created from the DOM
+		const editButton = createElement('button', 'textContent', 'edit');
+		li.appendChild(editButton);
+
+		const removeButton = createElement('button', 'textContent', 'remove');
+
+>>>>>>> parent of f3696ad... 01202021: appendingLI function refactored
 		li.appendChild(removeButton);
 		return li;
 	}
