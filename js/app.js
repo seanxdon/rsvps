@@ -101,6 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			const button = e.target;
 			const li = button.parentNode;
 			const ul = li.parentNode;
+
 			//button with class name remove
 			if (e.target.textContent === 'remove') {
 				ul.removeChild(li);
