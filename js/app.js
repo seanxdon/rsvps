@@ -41,31 +41,33 @@ document.addEventListener('DOMContentLoaded', () => {
 	});
 	//Creating Li elements
 	function createLI(text) {
+		function createElement(elementName, property, value) {
+			const element = document.createElement(elementName);
+			element[property] = value;
+			return element;
+		}
+
 		//Creating an li of invitees
 		const li = document.createElement('li');
 
 		//edit button span
-		const span = document.createElement('span');
-		span.textContent = text;
+		const span = createElement('span', 'textContent', text);
 		li.appendChild(span);
 
 		//Label 'Confirmed' created from the DOM
-		const label = document.createElement('label');
-		label.textContent = 'Confirmed';
-
-		//Checkbox created from DOM
-		const checkbox = document.createElement('input');
-		checkbox.type = 'checkbox';
-		label.appendChild(checkbox);
+		const label = createElement('label', 'textContent', 'Confirmed');
 		li.appendChild(label);
 
+		//Checkbox created from DOM
+		const checkbox = createElement('input', 'type', 'checkbox');
+		label.appendChild(checkbox);
+
 		//Remove button created from the DOM
-		const editButton = document.createElement('button');
-		editButton.textContent = 'edit';
+		const editButton = createElement('button', 'textContent', 'edit');
 		li.appendChild(editButton);
 
-		const removeButton = document.createElement('button');
-		removeButton.textContent = 'remove';
+		const removeButton = createElement('button', 'textContent', 'remove');
+
 		li.appendChild(removeButton);
 		return li;
 	}
