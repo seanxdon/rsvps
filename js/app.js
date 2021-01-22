@@ -97,11 +97,10 @@ document.addEventListener('DOMContentLoaded', () => {
 			const li = button.parentNode;
 			const ul = li.parentNode;
 
-			//button with class name remove
-			if (e.target.textContent === 'remove') {
+			function removeName() {
 				ul.removeChild(li);
-				//button with class name edit
-			} else if (button.textContent === 'edit') {
+			}
+			function editName() {
 				const span = li.firstElementChild;
 				const input = document.createElement('input');
 				input.type = 'text';
@@ -109,14 +108,24 @@ document.addEventListener('DOMContentLoaded', () => {
 				li.insertBefore(input, span);
 				li.removeChild(span);
 				button.textContent = 'save';
-				//button with class name save
-			} else if (button.textContent === 'save') {
+			}
+			function saveName() {
 				const input = li.firstElementChild;
 				const span = document.createElement('span');
 				span.textContent = input.value;
 				li.insertBefore(span, input);
 				li.removeChild(input);
 				button.textContent = 'edit';
+			}
+			//button with class name remove
+			if (e.target.textContent === 'remove') {
+				removeName();
+				//button with class name edit
+			} else if (button.textContent === 'edit') {
+				editName();
+				//button with class name save
+			} else if (button.textContent === 'save') {
+				saveName();
 			}
 		}
 	});
