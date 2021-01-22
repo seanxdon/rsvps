@@ -96,37 +96,31 @@ document.addEventListener('DOMContentLoaded', () => {
 			const button = e.target;
 			const li = button.parentNode;
 			const ul = li.parentNode;
-
-			function removeName() {
-				ul.removeChild(li);
-			}
-			function editName() {
-				const span = li.firstElementChild;
-				const input = document.createElement('input');
-				input.type = 'text';
-				input.value = span.textContent;
-				li.insertBefore(input, span);
-				li.removeChild(span);
-				button.textContent = 'save';
-			}
-			function saveName() {
-				const input = li.firstElementChild;
-				const span = document.createElement('span');
-				span.textContent = input.value;
-				li.insertBefore(span, input);
-				li.removeChild(input);
-				button.textContent = 'edit';
-			}
-			//button with class name remove
-			if (e.target.textContent === 'remove') {
-				removeName();
-				//button with class name edit
-			} else if (button.textContent === 'edit') {
-				editName();
-				//button with class name save
-			} else if (button.textContent === 'save') {
-				saveName();
-			}
+			const action = button.textContent;
+			nameActions = {
+				remove: () => {
+					ul.removeChild(li);
+				},
+				edit: () => {
+					const span = li.firstElementChild;
+					const input = document.createElement('input');
+					input.type = 'text';
+					input.value = span.textContent;
+					li.insertBefore(input, span);
+					li.removeChild(span);
+					button.textContent = 'save';
+				},
+				save: () => {
+					const input = li.firstElementChild;
+					const span = document.createElement('span');
+					span.textContent = input.value;
+					li.insertBefore(span, input);
+					li.removeChild(input);
+					button.textContent = 'edit';
+				},
+			};
+			//select and run button action name
+			nameActions[action]();
 		}
 	});
 });
