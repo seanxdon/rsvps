@@ -119,7 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
 					button.textContent = 'edit';
 				},
 			};
-			//select and run button action name
+			//select and run button action
 			nameActions[action]();
 		}
 	});
