@@ -1,15 +1,10 @@
-// IFFEE
 document.addEventListener('DOMContentLoaded', () => {
-	// set form var
-	let form = document.querySelector('#registrar');
-	// set input var
-	let input = form.querySelector('input');
+	const form = document.getElementById('registrar');
+	const input = form.querySelector('input');
 
 	const mainDiv = document.querySelector('.main');
-	//set ul var
-	const ul = document.querySelector('#invitedList');
+	const ul = document.getElementById('invitedList');
 
-	//div with filter checkbox
 	const div = document.createElement('div');
 	const filterLabel = document.createElement('label');
 	const filterCheckBox = document.createElement('input');
@@ -19,27 +14,26 @@ document.addEventListener('DOMContentLoaded', () => {
 	div.appendChild(filterLabel);
 	div.appendChild(filterCheckBox);
 	mainDiv.insertBefore(div, ul);
-
 	filterCheckBox.addEventListener('change', (e) => {
 		const isChecked = e.target.checked;
 		const lis = ul.children;
 		if (isChecked) {
-			for (let i = 0; i < lis.length; i++) {
+			for (let i = 0; i < lis.length; i += 1) {
 				let li = lis[i];
-				if (li.className === 'responded') {
+				if ((li.className = 'responded')) {
 					li.style.display = '';
 				} else {
 					li.style.display = 'none';
 				}
 			}
 		} else {
-			for (let i = 0; i < lis.length; i++) {
+			for (let i = 0; i < lis.length; i += 1) {
 				let li = lis[i];
 				li.style.display = '';
 			}
 		}
 	});
-	//Creating Li elements
+
 	function createLI(text) {
 		function createElement(elementName, property, value) {
 			const element = document.createElement(elementName);
@@ -50,11 +44,11 @@ document.addEventListener('DOMContentLoaded', () => {
 		function appendToLI(elementName, property, value) {
 			const element = createElement(elementName, property, value);
 			li.appendChild(element);
-			return li;
+			return element;
 		}
 
 		const li = document.createElement('li');
-		appendToLI('span', 'textContent', text);
+		appendToLI('span', 'textContent', 'text');
 		appendToLI('label', 'textContent', 'Confirmed').appendChild(
 			createElement('input', 'type', 'checkbox')
 		);
@@ -63,25 +57,18 @@ document.addEventListener('DOMContentLoaded', () => {
 		return li;
 	}
 
-	//form submistion func
 	form.addEventListener('submit', (e) => {
 		e.preventDefault();
-
-		//input value stored and string is reset
 		const text = input.value;
 		input.value = '';
-
 		const li = createLI(text);
-		//add li Element
 		ul.appendChild(li);
 	});
 
-	//checkbox
 	ul.addEventListener('change', (e) => {
-		const checkbox = event.target;
+		const checkbox = e.target;
+		const listItem = checkbox.parentNode;
 		const checked = checkbox.checked;
-		//tarverse up the DOM to the li
-		const listItem = checkbox.parentNode.parentNode;
 
 		if (checked) {
 			listItem.className = 'responded';
@@ -90,22 +77,21 @@ document.addEventListener('DOMContentLoaded', () => {
 		}
 	});
 
-	//button
 	ul.addEventListener('click', (e) => {
 		if (e.target.tagName === 'BUTTON') {
 			const button = e.target;
 			const li = button.parentNode;
 			const ul = li.parentNode;
 			const action = button.textContent;
-			nameActions = {
-				remove: () => {
+			const nameActions = {
+				remove: (li) => {
 					ul.removeChild(li);
 				},
 				edit: () => {
 					const span = li.firstElementChild;
 					const input = document.createElement('input');
 					input.type = 'text';
-					input.value = span.textContent;
+					input.textContent = span.textContent;
 					li.insertBefore(input, span);
 					li.removeChild(span);
 					button.textContent = 'save';
@@ -119,7 +105,8 @@ document.addEventListener('DOMContentLoaded', () => {
 					button.textContent = 'edit';
 				},
 			};
-			//select and run button action
+
+			// select and run action in button's name
 			nameActions[action]();
 		}
 	});
